@@ -1,4 +1,5 @@
 python-telegram-bot
-openai
+google-genai
+
 
 

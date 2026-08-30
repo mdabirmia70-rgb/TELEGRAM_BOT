@@ -1,4 +1,4 @@
-name: Run Telegram Bot
+Name: Run Telegram Bot
 
 on:
   workflow_dispatch:
@@ -27,4 +27,5 @@ jobs:
       env:
         TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
         GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        ADMIN_ID: ${{ secrets.ADMIN_ID }}
       run: python bot.py

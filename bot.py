@@ -18,9 +18,9 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await context.bot.send_chat_action(chat_id=update.effective_chat.id, action="typing")
     
     try:
-        # গুগল জেমিনির সর্বাধুনিক Gemini 2.5 Flash মডেল
+        # gemini-3.6-flash মডেল ব্যবহার করা হচ্ছে
         response = client.models.generate_content(
-            model='gemini-2.5-flash',
+            model='gemini-3.6-flash',
             contents=update.message.text,
         )
         reply = response.text
@@ -30,6 +30,10 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(reply)
 
 def main():
+    if not TELEGRAM_TOKEN:
+        print("TELEGRAM_BOT_TOKEN পাওয়া যায়নি। প্রোগ্রাম বন্ধ হচ্ছে।")
+        return
+
     app = Application.builder().token(TELEGRAM_TOKEN).build()
     app.add_handler(CommandHandler("start", start))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
